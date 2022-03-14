@@ -17,7 +17,8 @@ vim.opt.wrap = true
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "gruvbox-material"
+-- lvim.colorscheme = "gruvbox-material"
+lvim.colorscheme = "onedarker"
 vim.g.gruvbox_material_background = "hard"
 vim.g.gruvbox_material_palette = "mix"
 
@@ -36,15 +37,6 @@ lvim.keys.insert_mode["jj"] = false
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-x>"] = ":q<cr>"
 
-
-
--- Turn off highlight when pressing Esc
-vim.cmd("nmap <silent> <Esc> :noh <CR>")
--- Yank to system clipboard
-vim.cmd([[vnoremap <leader>y "+y]])
--- Remaps for swedish keyboard layout.
-vim.cmd("noremap § $")
--- Bind vim fugitive to which_key <leader>gs
 lvim.builtin.which_key.mappings["g"] = {
   name = "Git",
   j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -71,9 +63,6 @@ lvim.builtin.which_key.mappings["g"] = {
   },
 }
 
-
-
-
 -- auto hybrid line numbers
 vim.cmd([[
 :set number
@@ -85,6 +74,7 @@ vim.cmd([[
 :augroup END
 ]])
 
+-- Bind vim fugitive to which_key <leader>gs
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 local _, actions = pcall(require, "telescope.actions")
@@ -102,9 +92,25 @@ lvim.builtin.telescope.defaults.mappings = {
     ["<C-k>"] = actions.move_selection_previous,
   },
 }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+
+-- Search and replace
+lvim.builtin.which_key.mappings["r"] = {
+  ":%s/pattern/replace/gc", "Search and replace"
+}
+
+
+--
+-- Nice old vim binds
+--
+-- Turn off highlight when pressing Esc
+vim.cmd("nmap <silent> <Esc> :noh <CR>")
+-- Remaps for swedish keyboard layout.
+vim.cmd("noremap § $")
+-- Yank to system clipboard
+-- vim.cmd('vnoremap <leader>y "+y')
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -199,6 +205,16 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   },
 -- }
 
+-- Rainbow
+-- lvim.builtin.treesitter.rainbow = {
+--   enable = false,
+--   extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+--   max_file_lines = 2000, -- Do not enable for files with more than 1000 lines, int
+-- }
+
+
+
+
 -- Additional Plugins
 lvim.plugins = {
   {"folke/tokyonight.nvim"},
@@ -208,6 +224,30 @@ lvim.plugins = {
   {"tpope/vim-fugitive"},
   {"tpope/vim-rhubarb"},
   {"tommcdo/vim-fugitive-blame-ext"},
+  -- {"p00f/nvim-ts-rainbow"},
+  {
+  "nvim-telescope/telescope-project.nvim",
+  event = "BufWinEnter",
+  setup = function()
+    vim.cmd [[packadd telescope.nvim]]
+  end,
+  },
+  {
+  "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "*" }, {
+          RGB = true, -- #RGB hex codes
+          RRGGBB = true, -- #RRGGBB hex codes
+          RRGGBBAA = true, -- #RRGGBBAA hex codes
+          rgb_fn = true, -- CSS rgb() and rgba() functions
+          hsl_fn = true, -- CSS hsl() and hsla() functions
+          css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+          -- Available modes: foreground, background
+          mode = 'background'; -- Set the display mode.
+          })
+  end,
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
