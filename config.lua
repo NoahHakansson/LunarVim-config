@@ -93,6 +93,7 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["h"] = { ":ClangdSwitchSourceHeader<CR>", "Switch Source/Header" }
 
 -- Search and replace
 lvim.builtin.which_key.mappings["r"] = {
@@ -212,6 +213,11 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   max_file_lines = 2000, -- Do not enable for files with more than 1000 lines, int
 -- }
 
+-- Additional plugin binds
+vim.api.nvim_set_keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "S", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+vim.api.nvim_set_keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 
 
 
@@ -226,27 +232,34 @@ lvim.plugins = {
   {"tommcdo/vim-fugitive-blame-ext"},
   -- {"p00f/nvim-ts-rainbow"},
   {
-  "nvim-telescope/telescope-project.nvim",
-  event = "BufWinEnter",
-  setup = function()
-    vim.cmd [[packadd telescope.nvim]]
-  end,
+    "nvim-telescope/telescope-project.nvim",
+    event = "BufWinEnter",
+    setup = function()
+      vim.cmd [[packadd telescope.nvim]]
+    end,
   },
   {
-  "norcalli/nvim-colorizer.lua",
+    "gbprod/substitute.nvim",
     config = function()
-      require("colorizer").setup({ "*" }, {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          RRGGBBAA = true, -- #RRGGBBAA hex codes
-          rgb_fn = true, -- CSS rgb() and rgba() functions
-          hsl_fn = true, -- CSS hsl() and hsla() functions
-          css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          -- Available modes: foreground, background
-          mode = 'background'; -- Set the display mode.
-          })
-  end,
+      require("substitute").setup()
+    end
+  },
+  -- half buggy colorizer
+  {
+    "norcalli/nvim-colorizer.lua",
+      config = function()
+        require("colorizer").setup({ "*" }, {
+            RGB = true, -- #RGB hex codes
+            RRGGBB = true, -- #RRGGBB hex codes
+            RRGGBBAA = true, -- #RRGGBBAA hex codes
+            rgb_fn = true, -- CSS rgb() and rgba() functions
+            hsl_fn = true, -- CSS hsl() and hsla() functions
+            css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+            css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+            -- Available modes: foreground, background
+            mode = 'background'; -- Set the display mode.
+            })
+    end,
   },
 }
 
