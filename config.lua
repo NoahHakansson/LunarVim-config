@@ -26,8 +26,12 @@ vim.g.gruvbox_material_palette = "mix"
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
+-- switch between last two buffers
+lvim.keys.normal_mode["<space><space>"] = "<C-^>"
+-- vim.cmd("nnoremap <leader><leader> <c-^>")
 -- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- unmap a default keymapping
+-- lvim.keys.normal_mode["<C-s>"] = false
 -- 'jk' for quitting insert mode
 lvim.keys.insert_mode["jk"] = false
 -- 'kj' for quitting insert mode
@@ -35,7 +39,9 @@ lvim.keys.insert_mode["kj"] = false
 -- 'jj' for quitting insert mode
 lvim.keys.insert_mode["jj"] = false
 -- edit a default keymapping
--- lvim.keys.normal_mode["<C-x>"] = ":q<cr>"
+
+-- rebind ToggleTerminal Terminal
+lvim.builtin.terminal.open_mapping = [[<c-x>]]
 
 lvim.builtin.which_key.mappings["g"] = {
   name = "Git",
@@ -226,6 +232,9 @@ lvim.plugins = {
   {"folke/tokyonight.nvim"},
   {"tpope/vim-surround"},
   {"sainnhe/gruvbox-material"},
+  -- smart identation
+  {"tpope/vim-sleuth"},
+  -- {"Darazaki/indent-o-matic"},
   -- Git-related plugins
   {"tpope/vim-fugitive"},
   {"tpope/vim-rhubarb"},
@@ -243,6 +252,18 @@ lvim.plugins = {
     config = function()
       require("substitute").setup()
     end
+  },
+  {
+  "lukas-reineke/indent-blankline.nvim",
+  event = "BufRead",
+  setup = function()
+    vim.g.indentLine_enabled = 1
+    vim.g.indent_blankline_char = "▏"
+    vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
+    vim.g.indent_blankline_buftype_exclude = {"terminal"}
+    vim.g.indent_blankline_show_trailing_blankline_indent = false
+    vim.g.indent_blankline_show_first_indent_level = false
+  end
   },
   -- half buggy colorizer
   {
