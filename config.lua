@@ -28,6 +28,9 @@ lvim.leader = "space"
 -- add your own keymapping
 -- switch between last two buffers
 lvim.keys.normal_mode["<space><space>"] = "<C-^>"
+-- Yank to system clipboard
+lvim.keys.visual_mode["<space>y"] = '"+y'
+-- vim.cmd('vnoremap <leader>y "+y')
 -- vim.cmd("nnoremap <leader><leader> <c-^>")
 -- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- unmap a default keymapping
@@ -84,6 +87,7 @@ vim.cmd([[
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 local _, actions = pcall(require, "telescope.actions")
+-- lvim.builtin.telescope.file_ignore_patterns = {".cach"}
 lvim.builtin.telescope.defaults.mappings = {
   -- for input mode
   i = {
