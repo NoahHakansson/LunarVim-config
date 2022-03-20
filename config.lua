@@ -54,7 +54,7 @@ lvim.builtin.which_key.mappings["g"] = {
   p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
   r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
   R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-  s = { "<cmd>G<cr>", "Fugitive" },
+  f = { "<cmd>G<cr>", "Fugitive" },
   u = {
     "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
     "Undo Stage Hunk",
