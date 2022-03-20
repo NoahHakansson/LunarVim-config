@@ -30,6 +30,8 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<space><space>"] = "<C-^>"
 -- Yank to system clipboard
 lvim.keys.visual_mode["<space>y"] = '"+y'
+-- shift+q to quit
+lvim.keys.normal_mode["<S-q>"] = ":q<CR>"
 -- vim.cmd('vnoremap <leader>y "+y')
 -- vim.cmd("nnoremap <leader><leader> <c-^>")
 -- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
