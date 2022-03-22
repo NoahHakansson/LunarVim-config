@@ -32,6 +32,8 @@ lvim.keys.normal_mode["<space><space>"] = "<C-^>"
 lvim.keys.visual_mode["<space>y"] = '"+y'
 -- shift+q to quit
 lvim.keys.normal_mode["<S-q>"] = ":q<CR>"
+lvim.keys.normal_mode["<Tab>"] = ":bnext<CR>"
+lvim.keys.normal_mode["<S-Tab>"] = ":bprev<CR>"
 -- vim.cmd('vnoremap <leader>y "+y')
 -- vim.cmd("nnoremap <leader><leader> <c-^>")
 -- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
@@ -44,6 +46,12 @@ lvim.keys.insert_mode["kj"] = false
 -- 'jj' for quitting insert mode
 lvim.keys.insert_mode["jj"] = false
 -- edit a default keymapping
+
+-- Harpoon bindings
+lvim.keys.normal_mode["<C-f>"] = "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>"
+lvim.keys.normal_mode["<C-m>"] = "<cmd>lua require('harpoon.mark').add_file()<cr>"
+lvim.keys.normal_mode["<S-l>"] = "<cmd>lua require('harpoon.ui').nav_next()<cr>"
+lvim.keys.normal_mode["<S-h>"] = "<cmd>lua require('harpoon.ui').nav_prev()<cr>"
 
 -- rebind ToggleTerminal Terminal
 lvim.builtin.terminal.open_mapping = [[<c-x>]]
@@ -120,6 +128,14 @@ lvim.builtin.which_key.mappings["r"] = {
 vim.cmd("nmap <silent> <Esc> :noh <CR>")
 -- Remaps for swedish keyboard layout.
 vim.cmd("noremap § $")
+-- Quality of life rebinds
+vim.cmd("nnoremap n nzzzv")
+vim.cmd("nnoremap N Nzzzv")
+vim.cmd("inoremap , ,<c-g>u")
+vim.cmd("inoremap . .<c-g>u")
+vim.cmd("inoremap ! !<c-g>u")
+vim.cmd("inoremap ? ?<c-g>u")
+
 -- Yank to system clipboard
 -- vim.cmd('vnoremap <leader>y "+y')
 
@@ -243,7 +259,9 @@ lvim.plugins = {
   -- {"Darazaki/indent-o-matic"},
   -- Git-related plugins
   {"tpope/vim-fugitive"},
+  {"ThePrimeagen/harpoon"},
   {"tpope/vim-rhubarb"},
+  {"tpope/vim-obsession"},
   {"tommcdo/vim-fugitive-blame-ext"},
   -- {"p00f/nvim-ts-rainbow"},
   {
