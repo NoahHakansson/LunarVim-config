@@ -10,9 +10,22 @@ an executable
 
 -- Settings
 vim.opt.clipboard = ""
-vim.opt.showmode = true
+vim.opt.showmode = false
 vim.opt.scrolloff = 15
 vim.opt.wrap = true
+
+-- Transparency
+lvim.transparent_window = false
+
+-- lualine set to show current vim mode
+local mode = {
+    "mode",
+    padding = { left = 1, right = 1 },
+    color = {gui="bold"},
+    cond = nil,
+  }
+lvim.builtin.lualine.sections.lualine_a = {mode}
+
 
 -- general
 lvim.log.level = "warn"
@@ -52,6 +65,12 @@ lvim.keys.normal_mode["<C-f>"] = "<cmd>lua require('harpoon.ui').toggle_quick_me
 lvim.keys.normal_mode["<C-m>"] = "<cmd>lua require('harpoon.mark').add_file()<cr>"
 lvim.keys.normal_mode["<S-l>"] = "<cmd>lua require('harpoon.ui').nav_next()<cr>"
 lvim.keys.normal_mode["<S-h>"] = "<cmd>lua require('harpoon.ui').nav_prev()<cr>"
+lvim.builtin.which_key.mappings["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon(1)" }
+lvim.builtin.which_key.mappings["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon(2)" }
+lvim.builtin.which_key.mappings["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Harpoon(3)" }
+lvim.builtin.which_key.mappings["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Harpoon(4)" }
+lvim.builtin.which_key.mappings["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Harpoon(5)" }
+
 
 -- rebind ToggleTerminal Terminal
 lvim.builtin.terminal.open_mapping = [[<c-x>]]
@@ -114,11 +133,20 @@ lvim.builtin.telescope.defaults.mappings = {
 }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["h"] = { ":ClangdSwitchSourceHeader<CR>", "Switch Source/Header" }
+lvim.builtin.which_key.mappings["7"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" }
+lvim.builtin.which_key.vmappings["7"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" }
 
 -- Search and replace
 lvim.builtin.which_key.mappings["r"] = {
   ":%s/pattern/replace/gc", "Search and replace"
 }
+
+-- gitsigns
+lvim.builtin.gitsigns.opts.signs.add.text = "+"
+lvim.builtin.gitsigns.opts.signs.change.text = "~"
+lvim.builtin.gitsigns.opts.signs.delete.text = "-"
+lvim.builtin.gitsigns.opts.signs.topdelete.text = "-"
+lvim.builtin.gitsigns.opts.signs.changedelete.text = "~"
 
 
 --
@@ -152,9 +180,11 @@ vim.cmd("inoremap ? ?<c-g>u")
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+-- Configure builtin plugins
+lvim.builtin.alpha.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
+
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
@@ -162,6 +192,7 @@ lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
+  "cpp",
   "javascript",
   "json",
   "lua",
