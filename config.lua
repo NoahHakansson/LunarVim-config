@@ -60,6 +60,19 @@ lvim.keys.insert_mode["kj"] = false
 lvim.keys.insert_mode["jj"] = false
 -- edit a default keymapping
 
+-- Fix alt to function like altGr for important keys.
+-- Normal + (visual+select) + operator pending mode
+vim.cmd("map <M-0> }")
+vim.cmd("map <M-7> {")
+vim.cmd("map <M-9> ]")
+vim.cmd("map <M-8> [")
+-- Insert + command-line mode
+vim.cmd("map! <M-0> }")
+vim.cmd("map! <M-7> {")
+vim.cmd("map! <M-9> ]")
+vim.cmd("map! <M-8> [")
+
+
 -- Harpoon bindings
 lvim.keys.normal_mode["<C-f>"] = "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>"
 lvim.keys.normal_mode["<C-m>"] = "<cmd>lua require('harpoon.mark').add_file()<cr>"
@@ -95,10 +108,9 @@ lvim.builtin.which_key.mappings["g"] = {
     "<cmd>Telescope git_bcommits<cr>",
     "Checkout commit(for current file)",
   },
-  d = {
-    "<cmd>Gitsigns diffthis HEAD<cr>",
-    "Git Diff",
-  },
+  -- Diffview plugin binds
+  d = {"<cmd>DiffviewOpen<cr>", "Git Diff (diffview)",},
+  h = {"<cmd>DiffviewFileHistory<cr>", "File history (diffview)",},
 }
 
 -- auto hybrid line numbers
@@ -193,6 +205,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
   "cpp",
+  "markdown",
   "javascript",
   "json",
   "lua",
@@ -279,7 +292,6 @@ vim.api.nvim_set_keymap("n", "S", "<cmd>lua require('substitute').eol()<cr>", { 
 vim.api.nvim_set_keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 
 
-
 -- Additional Plugins
 lvim.plugins = {
   {"folke/tokyonight.nvim"},
@@ -294,6 +306,11 @@ lvim.plugins = {
   {"tpope/vim-rhubarb"},
   {"tpope/vim-obsession"},
   {"tommcdo/vim-fugitive-blame-ext"},
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+  },
+  -- end Git-related plugins
   -- {"p00f/nvim-ts-rainbow"},
   {
     "nvim-telescope/telescope-project.nvim",
