@@ -291,6 +291,17 @@ vim.api.nvim_set_keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", 
 vim.api.nvim_set_keymap("n", "S", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
 vim.api.nvim_set_keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 
+-- Trouble.nvim plugin
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
+
 
 -- Additional Plugins
 lvim.plugins = {
@@ -312,6 +323,17 @@ lvim.plugins = {
   },
   -- end Git-related plugins
   -- {"p00f/nvim-ts-rainbow"},
+  {
+  "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  -- The GOAT lsp_signature
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function() require"lsp_signature".on_attach() end,
+    event = "BufRead"
+  },
+  {"ellisonleao/glow.nvim"},
   {
     "nvim-telescope/telescope-project.nvim",
     event = "BufWinEnter",
