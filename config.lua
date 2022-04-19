@@ -13,6 +13,7 @@ vim.opt.clipboard = ""
 vim.opt.showmode = false
 vim.opt.scrolloff = 15
 vim.opt.wrap = true
+vim.opt.mouse = ""
 
 -- Transparency
 lvim.transparent_window = false
@@ -43,10 +44,10 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<space><space>"] = "<C-^>"
 -- Yank to system clipboard
 lvim.keys.visual_mode["<space>y"] = '"+y'
--- shift+q to quit
-lvim.keys.normal_mode["<S-q>"] = ":q<CR>"
-lvim.keys.normal_mode["<Tab>"] = ":bnext<CR>"
-lvim.keys.normal_mode["<S-Tab>"] = ":bprev<CR>"
+-- shift+q unbind
+lvim.keys.normal_mode["<S-q>"] = ""
+-- lvim.keys.normal_mode["<S-l>"] = ":bnext<CR>"
+-- lvim.keys.normal_mode["<S-h>"] = ":bprev<CR>"
 -- vim.cmd('vnoremap <leader>y "+y')
 -- vim.cmd("nnoremap <leader><leader> <c-^>")
 -- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
@@ -75,14 +76,15 @@ vim.cmd("map! <M-8> [")
 
 -- Harpoon bindings
 lvim.keys.normal_mode["<C-f>"] = "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>"
-lvim.keys.normal_mode["<C-m>"] = "<cmd>lua require('harpoon.mark').add_file()<cr>"
-lvim.keys.normal_mode["<S-l>"] = "<cmd>lua require('harpoon.ui').nav_next()<cr>"
-lvim.keys.normal_mode["<S-h>"] = "<cmd>lua require('harpoon.ui').nav_prev()<cr>"
-lvim.builtin.which_key.mappings["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon(1)" }
-lvim.builtin.which_key.mappings["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon(2)" }
-lvim.builtin.which_key.mappings["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Harpoon(3)" }
-lvim.builtin.which_key.mappings["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Harpoon(4)" }
-lvim.builtin.which_key.mappings["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Harpoon(5)" }
+-- lvim.keys.normal_mode["<C-h>"] = "<cmd>lua require('harpoon.mark').add_file()<cr>"
+lvim.builtin.which_key.mappings["m"] = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Harpoon mark file" }
+-- lvim.keys.normal_mode["<S-l>"] = "<cmd>lua require('harpoon.ui').nav_next()<cr>"
+-- lvim.keys.normal_mode["<S-h>"] = "<cmd>lua require('harpoon.ui').nav_prev()<cr>"
+lvim.builtin.which_key.mappings["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon 1" }
+lvim.builtin.which_key.mappings["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon 2" }
+lvim.builtin.which_key.mappings["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Harpoon 3" }
+lvim.builtin.which_key.mappings["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Harpoon 4" }
+lvim.builtin.which_key.mappings["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Harpoon 5" }
 
 
 -- rebind ToggleTerminal Terminal
@@ -201,22 +203,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "cpp",
-  "markdown",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
-}
+lvim.builtin.treesitter.ensure_installed = "maintained"
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
@@ -301,6 +288,7 @@ lvim.builtin.which_key.mappings["t"] = {
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
+-- copilot
 
 
 -- Additional Plugins
@@ -334,6 +322,20 @@ lvim.plugins = {
     event = "BufRead"
   },
   {"ellisonleao/glow.nvim"},
+  -- Github copilot
+  -- {"github/copilot.vim"}, -- only needed for first setup.
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "InsertEnter",
+  --   config = function ()
+  --     vim.schedule(function() require("copilot").setup() end)
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   after = {"copilot.lua", "nvim-cmp"},
+  -- },
+  --
   -- {
   --   "AckslD/nvim-neoclip.lua",
   --   event = "BufWinEnter",
@@ -367,7 +369,7 @@ lvim.plugins = {
   setup = function()
     vim.g.indentLine_enabled = 1
     vim.g.indent_blankline_char = "▏"
-    vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
+    vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "alpha"}
     vim.g.indent_blankline_buftype_exclude = {"terminal"}
     vim.g.indent_blankline_show_trailing_blankline_indent = false
     vim.g.indent_blankline_show_first_indent_level = false
