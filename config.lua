@@ -20,12 +20,12 @@ lvim.transparent_window = false
 
 -- lualine set to show current vim mode
 local mode = {
-    "mode",
-    padding = { left = 1, right = 1 },
-    color = {gui="bold"},
-    cond = nil,
-  }
-lvim.builtin.lualine.sections.lualine_a = {mode}
+  "mode",
+  padding = { left = 1, right = 1 },
+  color = { gui = "bold" },
+  cond = nil,
+}
+lvim.builtin.lualine.sections.lualine_a = { mode }
 
 
 -- general
@@ -111,8 +111,8 @@ lvim.builtin.which_key.mappings["g"] = {
     "Checkout commit(for current file)",
   },
   -- Diffview plugin binds
-  d = {"<cmd>DiffviewOpen<cr>", "Git Diff (diffview)",},
-  h = {"<cmd>DiffviewFileHistory<cr>", "File history (diffview)",},
+  d = { "<cmd>DiffviewOpen<cr>", "Git Diff (diffview)", },
+  h = { "<cmd>DiffviewFileHistory<cr>", "File history (diffview)", },
 }
 
 -- auto hybrid line numbers
@@ -203,7 +203,22 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = {
+  "bash",
+  "c",
+  "cpp",
+  "markdown",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "typescript",
+  "tsx",
+  "css",
+  "rust",
+  "java",
+  "yaml",
+}
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
@@ -293,18 +308,18 @@ lvim.builtin.which_key.mappings["t"] = {
 
 -- Additional Plugins
 lvim.plugins = {
-  {"folke/tokyonight.nvim"},
-  {"tpope/vim-surround"},
-  {"sainnhe/gruvbox-material"},
+  { "folke/tokyonight.nvim" },
+  { "tpope/vim-surround" },
+  { "sainnhe/gruvbox-material" },
   -- smart identation
-  {"tpope/vim-sleuth"},
+  { "tpope/vim-sleuth" },
   -- {"Darazaki/indent-o-matic"},
   -- Git-related plugins
-  {"tpope/vim-fugitive"},
-  {"ThePrimeagen/harpoon"},
-  {"tpope/vim-rhubarb"},
-  {"tpope/vim-obsession"},
-  {"tommcdo/vim-fugitive-blame-ext"},
+  { "tpope/vim-fugitive" },
+  { "ThePrimeagen/harpoon" },
+  { "tpope/vim-rhubarb" },
+  { "tpope/vim-obsession" },
+  { "tommcdo/vim-fugitive-blame-ext" },
   {
     "sindrets/diffview.nvim",
     event = "BufRead",
@@ -312,16 +327,16 @@ lvim.plugins = {
   -- end Git-related plugins
   -- {"p00f/nvim-ts-rainbow"},
   {
-  "folke/trouble.nvim",
+    "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
   -- The GOAT lsp_signature
   {
     "ray-x/lsp_signature.nvim",
-    config = function() require"lsp_signature".on_attach() end,
+    config = function() require "lsp_signature".on_attach() end,
     event = "BufRead"
   },
-  {"ellisonleao/glow.nvim"},
+  { "ellisonleao/glow.nvim" },
   -- Github copilot
   -- {"github/copilot.vim"}, -- only needed for first setup.
   -- {
@@ -346,7 +361,7 @@ lvim.plugins = {
   {
     "danymat/neogen",
     config = function()
-        require('neogen').setup()
+      require('neogen').setup()
     end,
     requires = "nvim-treesitter/nvim-treesitter",
   },
@@ -364,32 +379,32 @@ lvim.plugins = {
     end
   },
   {
-  "lukas-reineke/indent-blankline.nvim",
-  event = "BufRead",
-  setup = function()
-    vim.g.indentLine_enabled = 1
-    vim.g.indent_blankline_char = "▏"
-    vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "alpha"}
-    vim.g.indent_blankline_buftype_exclude = {"terminal"}
-    vim.g.indent_blankline_show_trailing_blankline_indent = false
-    vim.g.indent_blankline_show_first_indent_level = false
-  end
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    setup = function()
+      vim.g.indentLine_enabled = 1
+      vim.g.indent_blankline_char = "▏"
+      vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "alpha" }
+      vim.g.indent_blankline_buftype_exclude = { "terminal" }
+      vim.g.indent_blankline_show_trailing_blankline_indent = false
+      vim.g.indent_blankline_show_first_indent_level = false
+    end
   },
   -- half buggy colorizer
   {
     "norcalli/nvim-colorizer.lua",
-      config = function()
-        require("colorizer").setup({ "*" }, {
-            RGB = true, -- #RGB hex codes
-            RRGGBB = true, -- #RRGGBB hex codes
-            RRGGBBAA = true, -- #RRGGBBAA hex codes
-            rgb_fn = true, -- CSS rgb() and rgba() functions
-            hsl_fn = true, -- CSS hsl() and hsla() functions
-            css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-            css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-            -- Available modes: foreground, background
-            mode = 'background'; -- Set the display mode.
-            })
+    config = function()
+      require("colorizer").setup({ "*" }, {
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+        rgb_fn = true, -- CSS rgb() and rgba() functions
+        hsl_fn = true, -- CSS hsl() and hsla() functions
+        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        -- Available modes: foreground, background
+        mode = 'background'; -- Set the display mode.
+      })
     end,
   },
 }
