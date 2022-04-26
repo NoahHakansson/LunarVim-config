@@ -359,6 +359,10 @@ lvim.plugins = {
   --   end,
   -- },
   {
+    "Badhi/nvim-treesitter-cpp-tools",
+    requires = "nvim-treesitter/nvim-treesitter",
+  },
+  {
     "danymat/neogen",
     config = function()
       require('neogen').setup()
