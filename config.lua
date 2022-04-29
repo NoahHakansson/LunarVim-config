@@ -61,19 +61,6 @@ lvim.keys.insert_mode["kj"] = false
 lvim.keys.insert_mode["jj"] = false
 -- edit a default keymapping
 
--- Fix alt to function like altGr for important keys.
--- Normal + (visual+select) + operator pending mode
-vim.cmd("map <M-0> }")
-vim.cmd("map <M-7> {")
-vim.cmd("map <M-9> ]")
-vim.cmd("map <M-8> [")
--- Insert + command-line mode
-vim.cmd("map! <M-0> }")
-vim.cmd("map! <M-7> {")
-vim.cmd("map! <M-9> ]")
-vim.cmd("map! <M-8> [")
-
-
 -- Harpoon bindings
 lvim.keys.normal_mode["<C-f>"] = "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>"
 -- lvim.keys.normal_mode["<C-h>"] = "<cmd>lua require('harpoon.mark').add_file()<cr>"
@@ -169,7 +156,21 @@ lvim.builtin.gitsigns.opts.signs.changedelete.text = "~"
 -- Turn off highlight when pressing Esc
 vim.cmd("nmap <silent> <Esc> :noh <CR>")
 -- Remaps for swedish keyboard layout.
-vim.cmd("noremap § $")
+-- Normal + (visual+select) + operator pending mode
+vim.cmd("map § $")
+-- Fix alt to function like altGr for important keys.
+-- Normal + (visual+select) + operator pending mode
+vim.cmd("map <M-0> }")
+vim.cmd("map <M-7> {")
+vim.cmd("map <M-9> ]")
+vim.cmd("map <M-8> [")
+-- Insert + command-line mode
+vim.cmd("map! <M-0> }")
+vim.cmd("map! <M-7> {")
+vim.cmd("map! <M-9> ]")
+vim.cmd("map! <M-8> [")
+
+
 -- Quality of life rebinds
 vim.cmd("nnoremap n nzzzv")
 vim.cmd("nnoremap N Nzzzv")
