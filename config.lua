@@ -13,7 +13,7 @@ vim.opt.clipboard = ""
 vim.opt.showmode = false
 vim.opt.scrolloff = 15
 vim.opt.wrap = true
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
 
 -- Transparency
 lvim.transparent_window = false
@@ -98,8 +98,8 @@ lvim.builtin.which_key.mappings["g"] = {
     "Checkout commit(for current file)",
   },
   -- Diffview plugin binds
-  d = { "<cmd>DiffviewOpen<cr>", "Git Diff (diffview)", },
-  h = { "<cmd>DiffviewFileHistory<cr>", "File history (diffview)", },
+  d = { "<cmd>DiffviewOpen<cr>", "Diffview (close with :tabclose)", },
+  h = { "<cmd>DiffviewFileHistory<cr>", "DiffviewFileHistory (close with :tabclose)", },
 }
 
 -- auto hybrid line numbers
@@ -138,9 +138,9 @@ lvim.builtin.which_key.mappings["7"] = { "<cmd>lua require('Comment.api').toggle
 lvim.builtin.which_key.vmappings["7"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" }
 
 -- Search and replace
-lvim.builtin.which_key.mappings["r"] = {
-  ":%s/pattern/replace/gc", "Search and replace"
-}
+-- lvim.builtin.which_key.mappings["r"] = {
+--   ":%s/pattern/replace/gc", "Search and replace"
+-- }
 
 -- gitsigns
 lvim.builtin.gitsigns.opts.signs.add.text = "+"
