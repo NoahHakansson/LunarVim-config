@@ -97,10 +97,19 @@ lvim.builtin.which_key.mappings["g"] = {
     "<cmd>Telescope git_bcommits<cr>",
     "Checkout commit(for current file)",
   },
-  -- Diffview plugin binds
-  d = { "<cmd>DiffviewOpen<cr>", "Diffview (close with :tabclose)", },
-  h = { "<cmd>DiffviewFileHistory<cr>", "DiffviewFileHistory (close with :tabclose)", },
 }
+
+-- Diffview plugin binds
+lvim.builtin.which_key.mappings["gd"] = {
+  name= "Diffview",
+  d = { "<cmd>DiffviewOpen<cr>", "Open Diffview", },
+  h = { "<cmd>DiffviewFileHistory<cr>", "Open DiffviewFileHistory", },
+  c = { "<cmd>DiffviewClose<cr>", "Close Diffview", },
+  t = {"<cmd>DiffviewToggleFiles<cr>", "Toggle the files panel"},
+  f = {"DiffviewFocusFiles", "Bring focus to the files panel"},
+  r = {"DiffviewRefresh", "refresh Diffview"},
+}
+
 
 -- auto hybrid line numbers
 vim.cmd([[
