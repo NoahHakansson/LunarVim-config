@@ -376,6 +376,7 @@ lvim.plugins = {
   { "folke/tokyonight.nvim" },
   { "tpope/vim-surround" },
   { "sainnhe/gruvbox-material" },
+  {"olimorris/onedarkpro.nvim"},
   -- smart identation
   { "tpope/vim-sleuth" },
   -- {"Darazaki/indent-o-matic"},
